@@ -156,7 +156,7 @@ const RegisterScreen = () => {
           <Form.Group controlId="adminOption" className="my-3">
             <Form.Check
               type="checkbox"
-              label="Want to rent a house?"
+              label="Want to rent a house??"
               checked={isAdmin}
               onChange={handleChange}
             />
