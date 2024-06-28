@@ -16,19 +16,22 @@ const RegisterScreen = () => {
   const [pic, setPic] = useState(
     "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
   );
-  // const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
   const [picMessage, setPicMessage] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  //   const [isAdmin, setIsAdmin] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const handleChange = (e) => {
+    setIsAdmin(e.target.checked);
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (password != confirmpassword) {
+    if (password !== confirmpassword) {
       setMessage("Passwords do not match");
     } else {
       setMessage(null);
@@ -47,6 +50,7 @@ const RegisterScreen = () => {
             email,
             password,
             pic,
+            isAdmin, // Pass the isAdmin state to the backend
           },
           config
         );
@@ -63,8 +67,6 @@ const RegisterScreen = () => {
         setLoading(false);
       }
     }
-
-    // console.log(email);
   };
 
   const postDetails = (pics) => {
@@ -144,22 +146,21 @@ const RegisterScreen = () => {
           <Form.Group controlId="pic" className="my-3">
             <Form.Label>Profile Picture</Form.Label>
             <Form.Control
-              // id="custom-file"
               onChange={(e) => postDetails(e.target.files[0])}
               type="file"
-              accept="image/png"
+              accept="image/png, image/jpeg"
               label="Upload Profile Picture"
               custom
             />
           </Form.Group>
-          {/* <Form.Group controlId="adminOption" className="my-3">
-            <Form.Label>Looking for a house?</Form.Label>
-            <Form.Control
-              type="isAdmin"
-              value={isAdmin}
-              onChange={(e) => setIsAdmin(e.target.value)}
+          <Form.Group controlId="adminOption" className="my-3">
+            <Form.Check
+              type="checkbox"
+              label="Want to rent a house?"
+              checked={isAdmin}
+              onChange={handleChange}
             />
-          </Form.Group> */}
+          </Form.Group>
           <Button variant="primary" type="submit">
             Submit
           </Button>
