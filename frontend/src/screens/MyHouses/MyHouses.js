@@ -6,10 +6,14 @@ import Card from "react-bootstrap/esm/Card";
 // import Badge from "react-bootstrap/esm/Badge";
 import Accordion from "react-bootstrap/esm/Accordion";
 import axios from "axios";
-// import houses from "../../../../backend/data/houses";
+import { useDispatch, useSelector } from "react-redux";
+import { listHouses } from "../../actions/houseActions";
 
 const MyHouses = () => {
-  const [houses, setHouses] = useState([]);
+  const dispatch = useDispatch();
+
+  const houseList = useSelector((state) => state.houseList);
+  const { loading, houses, error } = houseList;
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure?")) {
@@ -18,15 +22,9 @@ const MyHouses = () => {
 
   console.log(houses);
 
-  const fetchHouses = async () => {
-    const { data } = await axios.get("/api/houses");
-
-    setHouses(data);
-  };
-
   useEffect(() => {
-    fetchHouses();
-  }, []);
+    dispatch(listHouses());
+  }, [dispatch]);
 
   return (
     <MainScreen title="Welcome back UserName..">
@@ -35,7 +33,7 @@ const MyHouses = () => {
           Add New House
         </Button>
       </Link>
-      {houses.map((house) => (
+      {houses?.map((house) => (
         <Accordion key={house._id}>
           <Card style={{ margin: 10 }}>
             <Card.Header style={{ display: "flex" }}>
