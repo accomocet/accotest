@@ -9,6 +9,7 @@ import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
 import CreateHouse from "./screens/CreateHouse/CreateHouse";
 import SingleHouse from "./screens/SingleHouse/SingleHouse";
+import ProfileScreen from "./screens/ProfileScreen/ProfileScreen";
 
 const App = () => {
   const [search, setSearch] = useState("");
@@ -20,6 +21,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginScreen />} />
+          <Route path="/profile" element={<ProfileScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/createhouse" element={<CreateHouse />} />
           <Route path="/house/:id" element={<SingleHouse />} />

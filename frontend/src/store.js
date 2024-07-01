@@ -1,7 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk"; // Importing thunk correctly
 import { composeWithDevTools } from "redux-devtools-extension"; // Correct package name
-import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
+import {
+  userLoginReducer,
+  userRegisterReducer,
+  userUpdateReducer,
+} from "./reducers/userReducers";
 import {
   houseCreateReducer,
   houseDeleteReducer,
@@ -18,6 +22,7 @@ const reducer = combineReducers({
   houseCreate: houseCreateReducer,
   houseUpdate: houseUpdateReducer,
   houseDelete: houseDeleteReducer,
+  userUpdate: userUpdateReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

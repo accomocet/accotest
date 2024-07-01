@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
 import "./LandingPage.css";
 import Button from "react-bootstrap/esm/Button";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
+
+    if (userInfo) {
+      navigate("/myhouses");
+    }
+  }, [navigate]);
   return (
     <div className="main">
       <Container>
