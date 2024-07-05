@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteHouseAction, listHouses } from "../../actions/houseActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
+import { Col, Row } from "react-bootstrap";
 
 const MyHouses = ({ search }) => {
   const dispatch = useDispatch();
@@ -108,42 +109,50 @@ const MyHouses = ({ search }) => {
               </Card.Header>
               <Accordion.Body eventKey="0">
                 <Card.Body>
-                  <blockquote className="blockquote mb-0">
-                    <p>
-                      <strong>Vacancies:</strong> {house.houseVacancies}
-                    </p>
-                    <p>
-                      <strong>Rent:</strong> {house.houseRent}
-                    </p>
-                    <p>
-                      <strong>Location:</strong>{" "}
-                      <a
-                        href={getGoogleMapsUrl(house.houseLocation)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ textDecoration: "underline", color: "blue" }}
-                      >
-                        {house.houseLocation}
-                      </a>
-                    </p>
-                    <p>
-                      <strong>Contact:</strong> {house.houseContact}
-                    </p>
-                    <p>
-                      <strong>House Picture:</strong>
-                      <br />
+                  <Row>
+                    <Col md={6}>
+                      <blockquote className="blockquote mb-0">
+                        <p>
+                          <strong>Vacancies:</strong> {house.houseVacancies}
+                        </p>
+                        <p>
+                          <strong>Rent:</strong> {house.houseRent}
+                        </p>
+                        <p>
+                          <strong>Location:</strong>{" "}
+                          <a
+                            href={getGoogleMapsUrl(house.houseLocation)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              textDecoration: "underline",
+                              color: "blue",
+                            }}
+                          >
+                            {house.houseLocation}
+                          </a>
+                        </p>
+                        <p>
+                          <strong>Contact:</strong> {house.houseContact}
+                        </p>
+                      </blockquote>
+                    </Col>
+                    <Col
+                      md={6}
+                      className="d-flex align-items-center justify-content-center"
+                    >
                       <img
                         src={house.housePic}
                         alt={house.houseName}
                         style={{
-                          width: "60%",
-                          display: "flex",
-                          alignItems: "center",
+                          width: "100%",
+                          maxHeight: "300px",
+                          objectFit: "cover",
                           padding: "20px",
                         }}
                       />
-                    </p>
-                  </blockquote>
+                    </Col>
+                  </Row>
                 </Card.Body>
               </Accordion.Body>
             </Card>
