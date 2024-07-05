@@ -14,6 +14,9 @@ function CreateHouse({ history }) {
   const [houseVacancies, setHouseVacancies] = useState("");
   const [houseLocation, setHouseLocation] = useState("");
   const [houseContact, setHouseContact] = useState("");
+  // const [pic, setPic] = useState("");
+  const [housePic, setHousePic] = useState("");
+  const [picMessage, setPicMessage] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,6 +32,9 @@ function CreateHouse({ history }) {
     setHouseVacancies("");
     setHouseLocation("");
     setHouseContact("");
+    setHousePic(
+      "https://t4.ftcdn.net/jpg/06/32/19/51/240_F_632195151_xTnjr4xGYG3oGyHiSWeCLLdWTKIVCpfY.jpg"
+    );
   };
 
   const submitHandler = (e) => {
@@ -38,7 +44,8 @@ function CreateHouse({ history }) {
       !houseRent ||
       !houseVacancies ||
       !houseLocation ||
-      !houseContact
+      !houseContact ||
+      !housePic
     )
       return;
     dispatch(
@@ -47,7 +54,8 @@ function CreateHouse({ history }) {
         houseRent,
         houseVacancies,
         houseLocation,
-        houseContact
+        houseContact,
+        housePic
       )
     );
 
@@ -56,6 +64,34 @@ function CreateHouse({ history }) {
   };
 
   useEffect(() => {}, []);
+
+  const postDetails = (pics) => {
+    if (!pics) {
+      return setPicMessage("Please select an Image");
+    }
+    setPicMessage(null);
+
+    if (pics.type === "image/jpeg" || pics.type === "image/png") {
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "notezipper");
+      data.append("cloud_name", "abhijithrajeevcloud");
+      fetch("http://api.cloudinary.com/v1_1/abhijithrajeevcloud/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setHousePic(data.url.toString());
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return setPicMessage("Please select an Image");
+    }
+  };
 
   return (
     <MainScreen title="Create a House">
@@ -111,6 +147,20 @@ function CreateHouse({ history }) {
                 value={houseContact}
                 placeholder="Enter the house contact no."
                 onChange={(e) => setHouseContact(e.target.value)}
+              />
+            </Form.Group>
+
+            {picMessage && (
+              <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
+            )}
+            <Form.Group controlId="housePic" className="my-3">
+              <Form.Label>House Picture</Form.Label>
+              <Form.Control
+                onChange={(e) => postDetails(e.target.files[0])}
+                type="file"
+                accept="image/png, image/jpeg"
+                label="Upload House Picture"
+                custom
               />
             </Form.Group>
 

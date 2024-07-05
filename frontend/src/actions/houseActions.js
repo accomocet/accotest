@@ -49,7 +49,14 @@ export const listHouses = () => async (dispatch, getState) => {
 };
 
 export const createHouseAction =
-  (houseName, houseRent, houseVacancies, houseLocation, houseContact) =>
+  (
+    houseName,
+    houseRent,
+    houseVacancies,
+    houseLocation,
+    houseContact,
+    housePic
+  ) =>
   async (dispatch, getState) => {
     try {
       dispatch({
@@ -69,7 +76,14 @@ export const createHouseAction =
 
       const { data } = await axios.post(
         "/api/houses/create",
-        { houseName, houseRent, houseVacancies, houseLocation, houseContact },
+        {
+          houseName,
+          houseRent,
+          houseVacancies,
+          houseLocation,
+          houseContact,
+          housePic,
+        },
         config
       );
 
@@ -90,7 +104,15 @@ export const createHouseAction =
   };
 
 export const updateHouseAction =
-  (id, houseName, houseRent, houseVacancies, houseLocation, houseContact) =>
+  (
+    id,
+    houseName,
+    houseRent,
+    houseVacancies,
+    houseLocation,
+    houseContact,
+    housePic
+  ) =>
   async (dispatch, getState) => {
     try {
       dispatch({
@@ -110,7 +132,14 @@ export const updateHouseAction =
 
       const { data } = await axios.put(
         `/api/houses/${id}`,
-        { houseName, houseRent, houseVacancies, houseLocation, houseContact },
+        {
+          houseName,
+          houseRent,
+          houseVacancies,
+          houseLocation,
+          houseContact,
+          housePic,
+        },
         config
       );
 

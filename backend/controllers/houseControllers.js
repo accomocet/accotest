@@ -9,15 +9,22 @@ const getHouses = expressAsyncHandler(async (req, res) => {
 });
 
 const createHouse = expressAsyncHandler(async (req, res) => {
-  const { houseName, houseRent, houseVacancies, houseLocation, houseContact } =
-    req.body;
+  const {
+    houseName,
+    houseRent,
+    houseVacancies,
+    houseLocation,
+    houseContact,
+    housePic,
+  } = req.body;
 
   if (
     !houseName ||
     !houseRent ||
     !houseVacancies ||
     !houseLocation ||
-    !houseContact
+    !houseContact ||
+    !housePic
   ) {
     res.status(400);
     throw new Error("Please fill all the Fields");
@@ -29,6 +36,7 @@ const createHouse = expressAsyncHandler(async (req, res) => {
       houseVacancies,
       houseLocation,
       houseContact,
+      housePic,
     });
 
     const createdHouse = await house.save();
@@ -48,8 +56,14 @@ const getHouseById = expressAsyncHandler(async (req, res) => {
 });
 
 const updateHouse = expressAsyncHandler(async (req, res) => {
-  const { houseName, houseRent, houseVacancies, houseLocation, houseContact } =
-    req.body;
+  const {
+    houseName,
+    houseRent,
+    houseVacancies,
+    houseLocation,
+    houseContact,
+    housePic,
+  } = req.body;
 
   const house = await House.findById(req.params.id);
 
@@ -63,6 +77,7 @@ const updateHouse = expressAsyncHandler(async (req, res) => {
     house.houseVacancies = houseVacancies;
     house.houseLocation = houseLocation;
     house.houseContact = houseContact;
+    house.housePic = housePic;
 
     const updatedHouse = await house.save();
     res.json(updatedHouse);

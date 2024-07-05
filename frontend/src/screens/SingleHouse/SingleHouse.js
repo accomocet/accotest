@@ -19,6 +19,8 @@ function SingleHouse() {
   const [houseVacancies, setHouseVacancies] = useState("");
   const [houseLocation, setHouseLocation] = useState("");
   const [houseContact, setHouseContact] = useState("");
+  const [housePic, setHousePic] = useState("");
+  const [picMessage, setPicMessage] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,6 +47,7 @@ function SingleHouse() {
       setHouseVacancies(data.houseVacancies);
       setHouseLocation(data.houseLocation);
       setHouseContact(data.houseContact);
+      setHousePic(data.housePic);
     };
 
     fetching();
@@ -56,6 +59,7 @@ function SingleHouse() {
     setHouseVacancies("");
     setHouseLocation("");
     setHouseContact("");
+    setHousePic("");
   };
 
   const updateHandler = (e) => {
@@ -65,7 +69,8 @@ function SingleHouse() {
       !houseRent ||
       !houseVacancies ||
       !houseLocation ||
-      !houseContact
+      !houseContact ||
+      !housePic
     )
       return;
     dispatch(
@@ -75,11 +80,40 @@ function SingleHouse() {
         houseRent,
         houseVacancies,
         houseLocation,
-        houseContact
+        houseContact,
+        housePic
       )
     );
     resetHandler();
     navigate("/myhouses");
+  };
+
+  const postDetails = (pics) => {
+    if (!pics) {
+      return setPicMessage("Please select an Image");
+    }
+    setPicMessage(null);
+
+    if (pics.type === "image/jpeg" || pics.type === "image/png") {
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "notezipper");
+      data.append("cloud_name", "abhijithrajeevcloud");
+      fetch("http://api.cloudinary.com/v1_1/abhijithrajeevcloud/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setHousePic(data.url.toString());
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return setPicMessage("Please select an Image");
+    }
   };
 
   return (
@@ -142,6 +176,21 @@ function SingleHouse() {
                 onChange={(e) => setHouseContact(e.target.value)}
               />
             </Form.Group>
+
+            {picMessage && (
+              <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
+            )}
+            <Form.Group controlId="housePic" className="my-3">
+              <Form.Label>House Picture</Form.Label>
+              <Form.Control
+                onChange={(e) => postDetails(e.target.files[0])}
+                type="file"
+                accept="image/png, image/jpeg"
+                label="Upload House Picture"
+                custom
+              />
+            </Form.Group>
+
             {loading && <Loading size={50} />}
             <Button variant="primary" type="submit">
               Update House
