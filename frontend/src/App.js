@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer";
 import LandingPage from "./screens/LandingPage/LandingPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MyHouses from "./screens/MyHouses/MyHouses";
+import AllHouses from "./screens/AllHouses/AllHouses"; // Import AllHouses component
 import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
 import CreateHouse from "./screens/CreateHouse/CreateHouse";
@@ -25,7 +26,12 @@ const App = () => {
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/createhouse" element={<CreateHouse />} />
           <Route path="/house/:id" element={<SingleHouse />} />
-          <Route path="/MyHouses" element={<MyHouses search={search} />} />
+          <Route path="/myhouses" element={<MyHouses search={search} />} />
+          <Route
+            path="/allhouses"
+            element={<AllHouses search={search} />}
+          />{" "}
+          {/* Add AllHouses route */}
         </Routes>
       </main>
       <Footer />

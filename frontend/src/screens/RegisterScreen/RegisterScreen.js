@@ -147,7 +147,16 @@ const RegisterScreen = () => {
         </Form>
         <Row className="py-3">
           <Col>
-            Already a user? <Link to="/login">Login Here</Link>
+            Already a user?{" "}
+            <Link
+              to="/login"
+              style={{
+                textDecoration: "underline",
+                color: "blue",
+              }}
+            >
+              Login Here
+            </Link>
           </Col>
         </Row>
       </div>

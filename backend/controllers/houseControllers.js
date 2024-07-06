@@ -1,10 +1,13 @@
 const expressAsyncHandler = require("express-async-handler");
 const House = require("../models/houseModel");
-// const { default: House } = require("../models/houseModel");
-// const houses = require("../data/houses");
 
 const getHouses = expressAsyncHandler(async (req, res) => {
   const houses = await House.find({ user: req.user._id });
+  res.json(houses);
+});
+
+const getAllHouses = expressAsyncHandler(async (req, res) => {
+  const houses = await House.find({});
   res.json(houses);
 });
 
@@ -106,6 +109,7 @@ const deleteHouse = expressAsyncHandler(async (req, res) => {
 
 module.exports = {
   getHouses,
+  getAllHouses,
   createHouse,
   getHouseById,
   updateHouse,

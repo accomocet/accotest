@@ -1,17 +1,15 @@
 import React from "react";
-// import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom"; // Import NavLink for active link styling
 import { logout } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Header = ({ setSearch }) => {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -30,16 +28,26 @@ const Header = ({ setSearch }) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav className="m-auto">
+          <Nav className="me-auto">
             <Form className="d-flex">
               <Form.Control
                 type="search"
-                placeholder="Search"
+                placeholder="Search Houses"
                 className="me-2"
                 aria-label="Search"
                 onChange={(e) => setSearch(e.target.value)}
               />
             </Form>
+          </Nav>
+
+          <Nav className="ml-auto">
+            <NavLink
+              to="/allhouses"
+              className="nav-link"
+              activeClassName="active"
+            >
+              View All Houses
+            </NavLink>
           </Nav>
 
           {userInfo ? (
@@ -48,10 +56,7 @@ const Header = ({ setSearch }) => {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="/myhouses">
-                <Link to="/myhouses"></Link>
-                My Houses
-              </Nav.Link>
+              <Nav.Link href="/myhouses">My Houses</Nav.Link>
               <NavDropdown title={userInfo?.name} id="navbarScrollingDropdown">
                 <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
                 <NavDropdown.Item onClick={logoutHandler}>
@@ -62,10 +67,7 @@ const Header = ({ setSearch }) => {
             </Nav>
           ) : (
             <Nav>
-              <Nav.Link href="/login">
-                <Link to="/login"></Link>
-                Login
-              </Nav.Link>
+              <Nav.Link href="/login">Login</Nav.Link>
             </Nav>
           )}
         </Navbar.Collapse>

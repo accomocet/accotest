@@ -12,6 +12,9 @@ import {
   HOUSE_DELETE_REQUEST,
   HOUSE_DELETE_SUCCESS,
   HOUSE_DELETE_FAIL,
+  HOUSE_LIST_ALL_FAIL,
+  HOUSE_LIST_ALL_SUCCESS,
+  HOUSE_LIST_ALL_REQUEST,
 } from "../constants/houseConstants";
 
 export const listHouses = () => async (dispatch, getState) => {
@@ -43,6 +46,30 @@ export const listHouses = () => async (dispatch, getState) => {
         : error.message;
     dispatch({
       type: HOUSE_LIST_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const listAllHouses = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: HOUSE_LIST_ALL_REQUEST,
+    });
+
+    const { data } = await axios.get("/api/houses/all");
+
+    dispatch({
+      type: HOUSE_LIST_ALL_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({
+      type: HOUSE_LIST_ALL_FAIL,
       payload: message,
     });
   }

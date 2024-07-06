@@ -5,6 +5,9 @@ import {
   HOUSE_DELETE_FAIL,
   HOUSE_DELETE_REQUEST,
   HOUSE_DELETE_SUCCESS,
+  HOUSE_LIST_ALL_FAIL,
+  HOUSE_LIST_ALL_REQUEST,
+  HOUSE_LIST_ALL_SUCCESS,
   HOUSE_LIST_FAIL,
   HOUSE_LIST_REQUEST,
   HOUSE_LIST_SUCCESS,
@@ -20,6 +23,19 @@ export const houseListReducer = (state = { houses: [] }, action) => {
     case HOUSE_LIST_SUCCESS:
       return { loading: false, houses: action.payload };
     case HOUSE_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const houseAllListReducer = (state = { houses: [] }, action) => {
+  switch (action.type) {
+    case HOUSE_LIST_ALL_REQUEST:
+      return { loading: true };
+    case HOUSE_LIST_ALL_SUCCESS:
+      return { loading: false, houses: action.payload };
+    case HOUSE_LIST_ALL_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

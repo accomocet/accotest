@@ -11,6 +11,7 @@ import {
   houseDeleteReducer,
   houseListReducer,
   houseUpdateReducer,
+  houseAllListReducer,
 } from "./reducers/houseReducers";
 
 const reducer = combineReducers({
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   houseList: houseListReducer,
+  houseAllList: houseAllListReducer,
   houseCreate: houseCreateReducer,
   houseUpdate: houseUpdateReducer,
   houseDelete: houseDeleteReducer,
