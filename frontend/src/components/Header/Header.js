@@ -24,6 +24,7 @@ const Header = ({ setSearch }) => {
     <Navbar expand="lg" className="bg-primary" variant="dark">
       <Container>
         <Navbar.Brand>
+          
           <Link to="/">AccomoCET</Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
