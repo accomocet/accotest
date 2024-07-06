@@ -2,12 +2,13 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
+import logo from '../Header/accomo logo.png'
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, NavLink, useNavigate } from "react-router-dom"; // Import NavLink for active link styling
 import { logout } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
-
+import '../Header/Header.css'
 const Header = ({ setSearch }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Header = ({ setSearch }) => {
     <Navbar expand="lg" className="bg-primary" variant="dark">
       <Container>
         <Navbar.Brand>
-          
+          <img className="acologo" src={logo}></img>
           <Link to="/">AccomoCET</Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
