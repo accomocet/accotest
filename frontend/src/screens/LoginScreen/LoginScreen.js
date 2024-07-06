@@ -38,53 +38,56 @@ const LoginScreen = ({ history }) => {
           <div className="loginContainer poppins-regular">
                {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
                {loading && <Loading />}
-               <div>
+               <div className="wrapper">
                     <Form onSubmit={submitHandler} className="">
                          <h1 className="poppins-bold">Login</h1>
                          <Form.Group
                               controlId="formBasicEmail"
-                              className="my-3"
+                              className="my-4.5 input-box"
                          >
-                              <Form.Label>Email Address</Form.Label>
+                              {/* <Form.Label>Email Address</Form.Label> */}
                               <Form.Control
+                                   className="ip"
                                    type="email"
                                    value={email}
                                    placeholder="Enter email"
                                    onChange={(e) => setEmail(e.target.value)}
                               />
-                              <FaUser />
+                              <FaUser className="icon" />
                          </Form.Group>
                          <Form.Group
                               controlId="formBasicPassword"
-                              className="my-3"
+                              className="my-4.5 input-box"
                          >
-                              <Form.Label>Password</Form.Label>
+                              {/* <Form.Label>Password</Form.Label> */}
                               <Form.Control
+                                   className="ip"
                                    type="password"
                                    value={password}
                                    placeholder="Enter password"
                                    onChange={(e) => setPassword(e.target.value)}
                               />
-                              <FaLock />
+                              <FaLock className="icon" />
                          </Form.Group>
-                         <Button variant="primary" type="submit">
-                              Submit
+                         <Button
+                              variant=""
+                              className="custom-btn poppins-semibold"
+                              type="submit"
+                         >
+                              Login
                          </Button>
+                         <Row className="new-customer">
+                              <Col>
+                                   New Customer?{" "}
+                                   <Link
+                                        className="new-customer-link"
+                                        to="/register"
+                                   >
+                                        Register Here
+                                   </Link>
+                              </Col>
+                         </Row>
                     </Form>
-                    <Row className="py-3">
-                         <Col>
-                              New Customer?{" "}
-                              <Link
-                                   to="/register"
-                                   style={{
-                                        textDecoration: "underline",
-                                        color: "blue",
-                                   }}
-                              >
-                                   Register Here
-                              </Link>
-                         </Col>
-                    </Row>
                </div>
           </div>
      );
