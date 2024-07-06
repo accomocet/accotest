@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import MainScreen from "../../components/MainScreen";
 import { useDispatch, useSelector } from "react-redux";
-import { Accordion, Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row, Container } from "react-bootstrap";
 import { listAllHouses } from "../../actions/houseActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
+import "./AllHouses.css";
 
 const AllHouses = ({ search }) => {
   const dispatch = useDispatch();
@@ -26,14 +27,18 @@ const AllHouses = ({ search }) => {
     <MainScreen title="All Houses">
       {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
       {loading && <Loading />}
-      {houses
-        ?.reverse()
-        .filter((filteredHouse) =>
-          filteredHouse.houseName.toLowerCase().includes(search.toLowerCase())
-        )
-        .map((house) => (
-          <Accordion key={house._id}>
-            <Card style={{ margin: 10 }}>
+      <Container className="d-flex flex-column align-items-center">
+        {houses
+          ?.reverse()
+          .filter((filteredHouse) =>
+            filteredHouse.houseName.toLowerCase().includes(search.toLowerCase())
+          )
+          .map((house) => (
+            <Card
+              key={house._id}
+              style={{ margin: 10, width: "100%" }}
+              className="hostelContainer"
+            >
               <Card.Header style={{ display: "flex" }}>
                 <span
                   style={{
@@ -45,62 +50,58 @@ const AllHouses = ({ search }) => {
                     fontSize: 18,
                   }}
                 >
-                  <Accordion.Header as={Card.Text} eventKey="0">
-                    {house.houseName}
-                  </Accordion.Header>
+                  {house.houseName}
                 </span>
               </Card.Header>
-              <Accordion.Body eventKey="0">
-                <Card.Body>
-                  <Row>
-                    <Col md={6}>
-                      <blockquote className="blockquote mb-0">
-                        <p>
-                          <strong>Vacancies:</strong> {house.houseVacancies}
-                        </p>
-                        <p>
-                          <strong>Rent:</strong> {house.houseRent}
-                        </p>
-                        <p>
-                          <strong>Location:</strong>{" "}
-                          <a
-                            href={getGoogleMapsUrl(house.houseLocation)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              textDecoration: "underline",
-                              color: "blue",
-                            }}
-                          >
-                            {house.houseLocation}
-                          </a>
-                        </p>
-                        <p>
-                          <strong>Contact:</strong> {house.houseContact}
-                        </p>
-                      </blockquote>
-                    </Col>
-                    <Col
-                      md={6}
-                      className="d-flex align-items-center justify-content-center"
-                    >
-                      <img
-                        src={house.housePic}
-                        alt={house.houseName}
-                        style={{
-                          width: "100%",
-                          maxHeight: "300px",
-                          objectFit: "cover",
-                          padding: "20px",
-                        }}
-                      />
-                    </Col>
-                  </Row>
-                </Card.Body>
-              </Accordion.Body>
+              <Card.Body>
+                <Row>
+                  <Col md={6}>
+                    <blockquote className="blockquote mb-0">
+                      <p>
+                        <strong>Vacancies:</strong> {house.houseVacancies}
+                      </p>
+                      <p>
+                        <strong>Rent:</strong> {house.houseRent}
+                      </p>
+                      <p>
+                        <strong>Location:</strong>{" "}
+                        <a
+                          href={getGoogleMapsUrl(house.houseLocation)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            textDecoration: "underline",
+                            color: "blue",
+                          }}
+                        >
+                          {house.houseLocation}
+                        </a>
+                      </p>
+                      <p>
+                        <strong>Contact:</strong> {house.houseContact}
+                      </p>
+                    </blockquote>
+                  </Col>
+                  <Col
+                    md={6}
+                    className="d-flex align-items-center justify-content-center"
+                  >
+                    <img
+                      src={house.housePic}
+                      alt={house.houseName}
+                      style={{
+                        width: "100%",
+                        maxHeight: "250px",
+                        objectFit: "cover",
+                        padding: "20px",
+                      }}
+                    />
+                  </Col>
+                </Row>
+              </Card.Body>
             </Card>
-          </Accordion>
-        ))}
+          ))}
+      </Container>
     </MainScreen>
   );
 };
