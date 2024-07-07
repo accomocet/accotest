@@ -26,7 +26,7 @@ const Header = ({ setSearch }) => {
                <Container>
                     <Navbar.Brand>
                          <img className="acologo" src={logo}></img>
-                         <Link to="/">AccomoCET</Link>
+                         <Link to="/">accomoCET</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
