@@ -10,81 +10,103 @@ import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/userActions";
+import CetImage from "../../cetpng.png";
 import { FaUser, FaLock } from "react-icons/fa";
 
 const LoginScreen = ({ history }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+     const [email, setEmail] = useState("");
+     const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch();
+     const dispatch = useDispatch();
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
-  const navigate = useNavigate();
+     const userLogin = useSelector((state) => state.userLogin);
+     const { loading, error, userInfo } = userLogin;
+     const navigate = useNavigate();
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate("/myhouses");
-    }
-  }, [navigate, userInfo]);
+     useEffect(() => {
+          if (userInfo) {
+               navigate("/myhouses");
+          }
+     }, [navigate, userInfo]);
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+     const submitHandler = async (e) => {
+          e.preventDefault();
 
-    dispatch(login(email, password));
-  };
+          dispatch(login(email, password));
+     };
 
-  return (
-    <div className="loginContainer poppins-regular">
-      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-      {loading && <Loading />}
-      <div className="wrapper">
-        <Form onSubmit={submitHandler} className="">
-          <h1 className="poppins-bold">Login</h1>
-          <Form.Group controlId="formBasicEmail" className="my-4.5 input-box">
-            {/* <Form.Label>Email Address</Form.Label> */}
-            <Form.Control
-              className="ip"
-              type="email"
-              value={email}
-              placeholder="Enter email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <FaUser className="icon" />
-          </Form.Group>
-          <Form.Group
-            controlId="formBasicPassword"
-            className="my-4.5 input-box"
-          >
-            {/* <Form.Label>Password</Form.Label> */}
-            <Form.Control
-              className="ip"
-              type="password"
-              value={password}
-              placeholder="Enter password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <FaLock className="icon" />
-          </Form.Group>
-          <Button
-            variant=""
-            className="custom-btn poppins-semibold"
-            type="submit"
-          >
-            Login
-          </Button>
-          <Row className="new-customer">
-            <Col>
-              New Customer?{" "}
-              <Link className="new-customer-link" to="/register">
-                Register Here
-              </Link>
-            </Col>
-          </Row>
-        </Form>
-      </div>
-    </div>
-  );
+     return (
+          <div className="loginContainer poppins-regular">
+               <Row className="row-container justify-content-end">
+                    <Col md={6} className="image-container">
+                         <img src={CetImage} className="cet-image"></img>
+                    </Col>
+                    <Col md={6} className="">
+                         <div className="wrapper">
+                              {error && (
+                                   <ErrorMessage variant="danger">
+                                        {error}
+                                   </ErrorMessage>
+                              )}
+                              {loading && <Loading />}
+                              <Form onSubmit={submitHandler} className="">
+                                   <h1 className="poppins-bold">Login</h1>
+                                   <Form.Group
+                                        controlId="formBasicEmail"
+                                        className="my-4.5 input-box"
+                                   >
+                                        {/* <Form.Label>Email Address</Form.Label> */}
+                                        <Form.Control
+                                             className="ip"
+                                             type="email"
+                                             value={email}
+                                             placeholder="Enter email"
+                                             onChange={(e) =>
+                                                  setEmail(e.target.value)
+                                             }
+                                        />
+                                        <FaUser className="icon" />
+                                   </Form.Group>
+                                   <Form.Group
+                                        controlId="formBasicPassword"
+                                        className="my-6 input-box"
+                                   >
+                                        {/* <Form.Label>Password</Form.Label> */}
+                                        <Form.Control
+                                             className="ip"
+                                             type="password"
+                                             value={password}
+                                             placeholder="Enter password"
+                                             onChange={(e) =>
+                                                  setPassword(e.target.value)
+                                             }
+                                        />
+                                        <FaLock className="icon" />
+                                   </Form.Group>
+                                   <Button
+                                        variant=""
+                                        className="custom-btn poppins-semibold"
+                                        type="submit"
+                                   >
+                                        Login
+                                   </Button>
+                                   <Row className="new-customer">
+                                        <Col>
+                                             New Customer?{" "}
+                                             <Link
+                                                  className="new-customer-link"
+                                                  to="/register"
+                                             >
+                                                  Register Here
+                                             </Link>
+                                        </Col>
+                                   </Row>
+                              </Form>
+                         </div>
+                    </Col>
+               </Row>
+          </div>
+     );
 };
 
 export default LoginScreen;

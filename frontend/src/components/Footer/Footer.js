@@ -4,23 +4,25 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 const Footer = () => {
-  return (
-    <footer
-      style={{
-        width: "100%",
-        position: "relative",
-        bottom: 0,
-        display: "flex",
-        justifycontent: "center",
-      }}
-    >
-      <Container>
-        <Row>
-          <Col className="text-center py-3">Copyright &copy; AccomoCET</Col>
-        </Row>
-      </Container>
-    </footer>
-  );
+     return (
+          <footer
+               style={{
+                    width: "100%",
+                    position: "relative",
+                    bottom: 0,
+                    display: "flex",
+                    justifycontent: "center",
+               }}
+          >
+               <Container>
+                    <Row>
+                         <Col className="text-center py-3">
+                              Copyright &copy; AccomoCET
+                         </Col>
+                    </Row>
+               </Container>
+          </footer>
+     );
 };
 
 export default Footer;
