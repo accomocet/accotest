@@ -3,3 +3,154 @@
      flex-direction: column;
      margin: 20px;
 }
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+.loginContainer {
+     display: flex;
+     /* flex-direction: column;     */
+     margin: 20px;
+     min-height: 80vh;
+     align-items: center;
+     justify-content: center;
+     /* box-shadow: 0 4px 30px rgba(255, 0, 0); */
+}
+/* body {
+     background: url(../../uwu.png);
+     background-size: cover;
+     background-position: center;
+} */
+
+/* .right-col {
+     background: url(../../cet.png);
+     background-size: cover;
+     background-position: center;
+} */
+
+.poppins-regular {
+     font-family: "Poppins", sans-serif;
+     font-weight: 400;
+     font-style: normal;
+     color: black;
+}
+
+.poppins-semibold {
+     font-family: "Poppins", sans-serif;
+     font-weight: 600;
+     font-style: normal;
+     color: black;
+}
+
+.poppins-bold {
+     font-family: "Poppins", sans-serif;
+     font-weight: 700;
+     font-style: normal;
+     color: black;
+}
+.row-container {
+     min-height: 80vh;
+     min-width: 90vh;
+     border-radius: 40px;
+     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.wrapper {
+     width: 420px;
+     border: 2px solid rgba(255, 255, 255, 0.2);
+     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+     backdrop-filter: blur(3.7px);
+     background: transparent;
+     color: black;
+     border-radius: 10px;
+     padding: 24px 32px;
+}
+.image-container {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background: transparent;
+}
+/* 
+.form-container {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background-color: black;
+     padding: 2rem;
+} */
+.cet-image {
+     max-width: 100%;
+     height: auto;
+}
+h1 {
+     font-size: 36px;
+     text-align: center;
+     margin: 10px;
+}
+.input-box {
+     position: relative;
+     width: 100%;
+     height: 50px;
+     margin: 20px 0;
+}
+
+.ip {
+     width: 100%;
+     height: 100%;
+     background: transparent;
+     border: none;
+     outline: none;
+     border: 2px solid rgba(255, 255, 255, 0.2);
+     border-radius: 40px;
+     font-size: 16px;
+     color: black;
+     padding: 20px 45px 20px 20px;
+}
+
+.ip-click {
+     background: transparent;
+}
+
+.icon {
+     position: absolute;
+     right: 20px;
+     top: 35%;
+     transform: translate(-50%);
+     font-size: 16px;
+}
+
+.ip::placeholder {
+     color: black;
+}
+
+.custom-btn {
+     width: 100%;
+     height: 40px;
+     font-size: 16px;
+     background: #fff;
+     border: none;
+     outline: none;
+     border-radius: 40px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     cursor: pointer;
+     font-size: 16px;
+     color: #333;
+}
+
+.new-customer {
+     font-size: 14.5px;
+     text-align: center;
+     margin: 20px 0 15px;
+}
+
+.new-customer-link {
+     color: black;
+     text-decoration: none;
+     font-weight: 600;
+}
+
+.new-customer-link:hover {
+     color: rgb(78, 73, 73);
+}
